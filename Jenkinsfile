@@ -1,19 +1,31 @@
 pipeline {
-    agent none 
-    stages {
-        stage('Example Build') {
-            agent { docker 'maven:3-alpine' }
-            steps {
-                echo 'Hello, Maven'
-                sh 'mvn --version'
-            }
-        }
-        stage('Example Test') {
-            agent { docker 'openjdk:8-jre' }
-            steps {
-                echo 'Hello, JDK'
-                sh 'java -version'
-            }
-        }
-    }
-}
+	agent any
+	stages {
+		stage("build") {
+			steps {
+				echo 'building the applicaiton...'
+			}
+		}
+		stage("test") {
+			steps {
+				echo 'testing the applicaiton...'
+			}
+		}
+		stage("deploy") {
+			steps {
+				echo 'deploying the applicaiton...'
+			}
+		}
+	}
+	post {
+			always {
+				echo 'building..'
+			}
+			success {
+	            echo 'success'
+			}
+			failure {
+	            echo 'failure'
+			}
+		}
+	}
