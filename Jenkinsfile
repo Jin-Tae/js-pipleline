@@ -8,6 +8,7 @@ pipeline {
 		}
 		stage("test") {
 			steps {
+                ech "${env.GIT_BRANCH}"
 				echo 'testing the applicaiton...'
 			}
 		}
